@@ -23,7 +23,7 @@ header a {
     color: var(--grey);
 }
 
-main {
+#start-div {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -40,6 +40,7 @@ main {
     font-size: 100%;
     border-radius: 15px;
     border: none;
+    opacity: .75;
 }
 
 #start:hover {
@@ -47,6 +48,7 @@ main {
     border-style: outset;
     border-color: var(--grey);
     font-size: 125%;
+    opacity: 1.0;
 }
 
 /* set display to none for opening of site, once user clicks 'start quiz', make them visable */
@@ -69,6 +71,7 @@ main {
     border: none;
     padding: 10px;
     margin: 5px;
+    opacity: .75;
 }
 
 .q-btn:hover {
@@ -76,4 +79,9 @@ main {
     border-style: outset;
     border-color: var(--grey);
     font-size: 125%;
+    opacity: 1.0;
+}
+
+#question-1, #question-2, #question-3, #question-4, #question-5 {
+    display: none;
 }
