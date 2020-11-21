@@ -1,5 +1,6 @@
 * {
     box-sizing: border-box;
+    margin: 15px;
   }
   
 :root {
@@ -31,7 +32,48 @@ main {
     text-align: center;
 }
 
+#start {
+    background-color: var(--secondary);
+    color: var(--primary);
+    width: 150px;
+    height: 50px;
+    font-size: 100%;
+    border-radius: 15px;
+    border: none;
+}
+
+#start:hover {
+    border-width: 2px;
+    border-style: outset;
+    border-color: var(--grey);
+    font-size: 125%;
+}
+
 /* set display to none for opening of site, once user clicks 'start quiz', make them visable */
-.q-btn {
+#answer-choices {
     display: none;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 5px;
+    width: 100%;
+}
+
+.q-btn {
+    background-color: var(--secondary);
+    color: var(--primary);
+    height: 50px;
+    font-size: 100%;
+    border-radius: 15px;
+    border: none;
+    padding: 10px;
+    margin: 5px;
+}
+
+.q-btn:hover {
+    border-width: 2px;
+    border-style: outset;
+    border-color: var(--grey);
+    font-size: 125%;
 }
