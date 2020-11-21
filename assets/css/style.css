@@ -1,0 +1,37 @@
+* {
+    box-sizing: border-box;
+  }
+  
+:root {
+    --primary: #44e9ff;
+    --secondary: #497980;
+    --tertiary: rgb(192, 246, 253);
+    --grey: #333;
+    font-size: 20px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px;
+}
+
+header a {
+    text-decoration: none;
+    color: var(--grey);
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 20px;
+    text-align: center;
+}
+
+/* set display to none for opening of site, once user clicks 'start quiz', make them visable */
+.q-btn {
+    display: none;
+}
