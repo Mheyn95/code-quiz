@@ -20,9 +20,16 @@ header {
     margin: 20px;
 }
 
-header a {
+#play-again {
     display: none;
     text-decoration: none;
+    /* text-align: center; */
+}
+
+#play-again:visited {
+    display: none;
+    text-decoration: none;
+    color: var(--secondary);
 }
 
 #start-div {

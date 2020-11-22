@@ -77,13 +77,13 @@ var quizStart = function() {
         if (timeLeft < 1) {
           timerEl.textContent = "";
           clearInterval(timeCounter);
+          endQuiz();
         }
         else {
           timerEl.textContent = "Time Remaing: " + timeLeft;
           timeLeft--;
         }
     }, 1000);
-
 
     firstSection.style.display = "none";
 
@@ -131,10 +131,8 @@ var answerCheck = function() {
     
     // check if the data-value of the clicked button is equal to the correct answerfor that questions
     if (this.getAttribute("data-value") === questions[questionNum].correctAnswer) {
-        console.log('You are correct!');
     }
     else {
-        console.log("You are wrong, sorry!")
         timeLeft = timeLeft - 10;
     }
 
@@ -155,20 +153,10 @@ var endQuiz = function () {
     while (answerBtns.firstChild) {
         answerBtns.removeChild(answerBtns.firstChild);
     }
-    
-
-    // clear timer
-    clearInterval(timeCounter);
 
     loadScores();
 
 }
-
-// var highScore = function() {
-    
-
-
-// }
 
 var loadScores = function() {
    
@@ -205,12 +193,9 @@ var loadScores = function() {
     
     //grab all scores in the scoreWrapper
     for (let i = 0; i < scoreWrapper.children.length; i++) {
-        console.log(scoreWrapper.children[i]);
         scoreArray.push(scoreWrapper.children[i].textContent)
-        console.log(scoreWrapper.children[i].textContent)
     }
         
-    console.log(scoreArray);
     
     if (scoreArray[0] === "") {
         scoreArray.shift();
