@@ -10,12 +10,12 @@ var questions = [
         correctAnswer: "a: Git"
     },
     {
-        question: 'What do we use to iterate in JaveScript?',
+        question: 'What do we use to iterate in JavaScript?',
         answers: [
             "a: Booleans",
             "b: Arrays",
             "c: For Loops",
-            "d: Varibales"
+            "d: Variables"
         ],
         correctAnswer: "c: For Loops"
     },
@@ -62,7 +62,9 @@ var questions = [
   var firstSection = document.getElementById("start-div");
   var timeCounter = document.getElementById("timerEl");
   var scoreContainer = document.getElementById("score-box");
+  var scoreWrapper = document.getElementById("box");
   var playAgain = document.getElementById("play-again");
+  var scoreArray = [];
   var currentSet = [];
   var timeLeft = 60;
 
@@ -145,53 +147,79 @@ var answerCheck = function() {
 
 var endQuiz = function () {
 
+    //clear page
+    questionText.style.display = "none";
+    timeCounter.style.display = "none";
+    
+
     while (answerBtns.firstChild) {
         answerBtns.removeChild(answerBtns.firstChild);
-        }
+    }
     
-    //store timer
-    var userName = window.prompt("Great job! What is your name?");
-    window.alert("You had a score of " + timeLeft);
-    
-    var newScore = {
-        name: userName,
-        score: timeLeft
-    };
-
-    var highScores = document.createElement("div");
-    highScores.textContent = newScore.name + " - " + newScore.score;
-    highScores.className = "scores";
-    scoreContainer.appendChild(highScores);
-
-    localStorage.setItem("scores", JSON.stringify(newScore));
 
     // clear timer
     clearInterval(timeCounter);
 
-    highScore();
+    loadScores();
 
 }
 
-var highScore = function() {
+// var highScore = function() {
     
-    //clear page
-    questionText.style.display = "none";
-    timeCounter.style.display = "none";
 
-    // show score grid
+
+// }
+
+var loadScores = function() {
+   
+    // show score box
     scoreContainer.style.display = "flex"
+    playAgain.style.display = "block";
     
     // get high scores
-    var savedScores = localStorage.getItem(JSON.parse("scores"));
+    var retrievedData = localStorage.getItem("scores");
+    var savedScores = JSON.parse(retrievedData);
 
-    // populate score box
-    var highScore = document.createElement("div");
-    highScore.textContent = savedScores.name + " - " + savedScores.score;
-    highScore.className = "scores";
-    scoreContainer.appendChild(highScore);
+    if (savedScores != null) {    
+        for (i = 0; i < savedScores.length; i++) {
+            var highScore = document.createElement("div");
+            highScore.textContent = savedScores[i];
+            highScore.className = "scores";
+            scoreWrapper.appendChild(highScore);
+        }
+    }
 
-    playAgain.style.display = "block";
-
+    //store timer
+    var userName = window.prompt("Great job! What is your name?");
+    window.alert("You had a score of " + timeLeft);
+    
+    if (userName) {
+        var newScore = userName + " - " + timeLeft + " ";
+    }
+        
+    var highScores = document.createElement("div");
+    highScores.textContent = newScore;
+    highScores.className = "scores";
+    scoreWrapper.appendChild(highScores);
+        
+    
+    //grab all scores in the scoreWrapper
+    for (let i = 0; i < scoreWrapper.children.length; i++) {
+        console.log(scoreWrapper.children[i]);
+        scoreArray.push(scoreWrapper.children[i].textContent)
+        console.log(scoreWrapper.children[i].textContent)
+    }
+        
+    console.log(scoreArray);
+    
+    if (scoreArray[0] === "") {
+        scoreArray.shift();
+        localStorage.setItem("scores", JSON.stringify(scoreArray));
+    }
+    else {
+    localStorage.setItem("scores", JSON.stringify(scoreArray));
+    }
+    
 }
 
 

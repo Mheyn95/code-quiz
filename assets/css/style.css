@@ -4,11 +4,13 @@
   }
   
 :root {
-    --primary: #44e9ff;
-    --secondary: #497980;
-    --tertiary: rgb(192, 246, 253);
+    --primary: black;
+    --secondary: #3adb2c;
     --grey: #333;
     font-size: 20px;
+    font-family: Consolas;
+    background-color:var(--primary);
+    color: var(--secondary);
 }
 
 header {
@@ -21,7 +23,6 @@ header {
 header a {
     display: none;
     text-decoration: none;
-    color: var(--grey);
 }
 
 #start-div {
@@ -36,12 +37,13 @@ header a {
 #start {
     background-color: var(--secondary);
     color: var(--primary);
-    width: 150px;
+    width: 100%;
     height: 50px;
     font-size: 100%;
     border-radius: 15px;
     border: none;
     opacity: .75;
+    font-family: consolas;
 }
 
 #start:hover {
@@ -73,6 +75,7 @@ header a {
     padding: 10px;
     margin: 5px;
     opacity: .75;
+    font-family: consolas;
 }
 
 .q-btn:hover {
@@ -91,4 +94,10 @@ header a {
     flex-wrap: wrap;
     padding: 5px;
     width: 100%;
+}
+
+#box {
+    border: solid 2px var(--secondary);
+    width: 100%;
+    height: 100%;
 }
