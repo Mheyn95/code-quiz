@@ -179,16 +179,22 @@ var loadScores = function() {
 
     //store timer
     var userName = window.prompt("Great job! What is your name?");
+    if(timeLeft < 0) {
+        timeLeft = 0;
+    }
     window.alert("You had a score of " + timeLeft);
     
     if (userName) {
-        var newScore = userName + " - " + timeLeft + " ";
+        var newScore = {
+            name: userName,
+            score: timeLeft
+        };
     }
         
     var highScores = document.createElement("div");
-    highScores.textContent = newScore;
+    highScores.textContent = newScore.name + " - " + newScore.score;
     highScores.className = "scores";
-    scoreWrapper.appendChild(highScores);
+    scoreWrapper.insertBefore(highScores, scoreWrapper.childNodes[0]);
         
     
     //grab all scores in the scoreWrapper
