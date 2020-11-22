@@ -60,23 +60,27 @@ var questions = [
   var questionText = document.querySelector("#question-text");
   var nextQuestion = document.getElementsByClassName("q-btn");
   var firstSection = document.getElementById("start-div");
+  var timeCounter = document.getElementById("timerEl");
+  var scoreContainer = document.getElementById("score-box");
+  var playAgain = document.getElementById("play-again");
   var currentSet = [];
+  var timeLeft = 60;
 
 var quizStart = function() {
 
     //start timer
-    
-    // var timer = setInterval( function() {
-    //     if (timeLeft < 1) {
-    //       clearInterval(timeInterval);
-    //       timerEl.textContent = "";
-    //       displayMessage();
-    //     }
-    //     else {
-    //       timerEl.textContent = timeLeft;
-    //       timeLeft--;
-    //     }
-    // }, 1000);
+
+
+    var timeCounter = setInterval( function() {
+        if (timeLeft < 1) {
+          timerEl.textContent = "";
+          clearInterval(timeCounter);
+        }
+        else {
+          timerEl.textContent = "Time Remaing: " + timeLeft;
+          timeLeft--;
+        }
+    }, 1000);
 
 
     firstSection.style.display = "none";
@@ -110,15 +114,14 @@ var quiz = function() {
 
             
         }
-
+        return
     }
    
-    // endQuiz();
+    endQuiz();
 
 }
 
 var answerCheck = function() {
-    console.log(this.correctAnswer);
     // clear out old responses
     while (answerBtns.firstChild) {
     answerBtns.removeChild(answerBtns.firstChild);
@@ -130,6 +133,7 @@ var answerCheck = function() {
     }
     else {
         console.log("You are wrong, sorry!")
+        timeLeft = timeLeft - 10;
     }
 
     // increment questionNum to go to next question
@@ -139,9 +143,56 @@ var answerCheck = function() {
     quiz();
 }
 
-// var endQuiz = function () {
-//     console.log('end');
-// }
+var endQuiz = function () {
+
+    while (answerBtns.firstChild) {
+        answerBtns.removeChild(answerBtns.firstChild);
+        }
+    
+    //store timer
+    var userName = window.prompt("Great job! What is your name?");
+    window.alert("You had a score of " + timeLeft);
+    
+    var newScore = {
+        name: userName,
+        score: timeLeft
+    };
+
+    var highScores = document.createElement("div");
+    highScores.textContent = newScore.name + " - " + newScore.score;
+    highScores.className = "scores";
+    scoreContainer.appendChild(highScores);
+
+    localStorage.setItem("scores", JSON.stringify(newScore));
+
+    // clear timer
+    clearInterval(timeCounter);
+
+    highScore();
+
+}
+
+var highScore = function() {
+    
+    //clear page
+    questionText.style.display = "none";
+    timeCounter.style.display = "none";
+
+    // show score grid
+    scoreContainer.style.display = "flex"
+    
+    // get high scores
+    var savedScores = localStorage.getItem(JSON.parse("scores"));
+
+    // populate score box
+    var highScore = document.createElement("div");
+    highScore.textContent = savedScores.name + " - " + savedScores.score;
+    highScore.className = "scores";
+    scoreContainer.appendChild(highScore);
+
+    playAgain.style.display = "block";
+
+}
 
 
 startEl.addEventListener("click", quizStart);

@@ -19,6 +19,7 @@ header {
 }
 
 header a {
+    display: none;
     text-decoration: none;
     color: var(--grey);
 }
@@ -82,6 +83,12 @@ header a {
     opacity: 1.0;
 }
 
-#question-1, #question-2, #question-3, #question-4, #question-5 {
+#score-box {
     display: none;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 5px;
+    width: 100%;
 }
